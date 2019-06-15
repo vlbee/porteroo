@@ -6,11 +6,13 @@ import PorterooApp from "./PorterooApp/PorterooApp";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+// const wards = ["A", "B", "C", "D"];
+
 const App = () => (
   <Router>
     <Route exact path="/" component={BoxApp} />
     <Route path="/porteroo" component={PorterooApp} />
-    <Route path="/box" component={BoxApp} />
+    <Route path={`/box/:ward`} component={BoxApp} />
   </Router>
 );
 
