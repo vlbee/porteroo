@@ -37,12 +37,12 @@ const UrgentReqest = styled("button")`
   margin-top: 30px;
 `;
 
-function BoxApp() {
+function BoxApp({ match }) {
   return (
     <Box>
       <CollectionPoint>
         <h1>Collection Point</h1>
-        <h2> WARD G2 </h2>
+        <h2> WARD {match.params.ward} </h2>
       </CollectionPoint>
       <main>
         <div>
