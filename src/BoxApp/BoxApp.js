@@ -53,7 +53,7 @@ function BoxApp({ match }) {
   const [pickUps, updatePickUps] = useState(state); // delivery or ion
 
   return (
-    <Box>
+    <NextCollection>
       <CollectionPoint>
         <img src={Logo} alt="porteroo logo" width={300} />
         <h1>Collection Point</h1>
@@ -78,7 +78,7 @@ function BoxApp({ match }) {
           <UrgentReqest>Urgent Collection Request</UrgentReqest>
         </div>
       </main>
-    </Box>
+    </NextCollection>
   );
 }
 
