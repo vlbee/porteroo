@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "./Header";
 import { useFetch } from "../useFetchHook";
@@ -13,23 +13,27 @@ const Col = styled("div")`
   align-items: center;
 `;
 
-const Request = styled("button")`
+const Button = styled("button")`
   font-size: 32px;
-  background-color: orange;
   color: white;
   font-weight: bold;
   padding: 20px 15px;
   margin: 15px;
   margin-top: 30px;
   min-width: 85vw;
+
   @media (min-width: 768px) {
     min-width: 300px;
     max-width: 400px;
   }
 `;
 
-const RequestUrgent = styled(Request)`
-  background-color: orangered;
+const Request = styled(Button)`
+  background-color: ${props => (props.enable ? "orange" : "lightgrey")};
+`;
+
+const RequestUrgent = styled(Button)`
+  background-color: ${props => (props.enable ? "orangered" : "lightgrey")};
   margin-top: 10px;
 `;
 
@@ -67,7 +71,29 @@ function BoxApp({ match }) {
   const { loading, data } = useFetch(
     `https://placeholder.com/locationPickUp/${match.params.ward}`
   );
-  console.log(data);
+
+  // Enables/Disables the requesting buttons depending if a request or urgent request has already been made
+  const requestReset = {
+    req: true,
+    urgentReq: true
+  };
+  const [requestActions, updateRequestActions] = useState(requestReset);
+
+  useEffect(() => {
+    if (data) {
+      data.urgent
+        ? updateRequestActions({
+            req: false,
+            urgentReq: false
+          })
+        : updateRequestActions({
+            req: false,
+            urgentReq: true
+          });
+    } else {
+      updateRequestActions(requestReset);
+    }
+  });
 
   return (
     <App>
@@ -78,8 +104,10 @@ function BoxApp({ match }) {
         <main>
           <Col>
             {data ? renderNext(data) : "No upcoming collections"}
-            <Request>Request</Request>
-            <RequestUrgent>Urgent Request</RequestUrgent>
+            <Request enable={requestActions.req}>Request</Request>
+            <RequestUrgent enable={requestActions.urgentReq}>
+              Urgent Request
+            </RequestUrgent>
           </Col>
         </main>
       )}

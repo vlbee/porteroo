@@ -5,7 +5,7 @@ const nextPickup = {
     expectedTime: 1710,
     expectedDeliveryTime: 1655,
     porterName: "Joe Porter",
-    urgent: true
+    urgent: false // change this to test different button states
   }
 };
 
@@ -31,6 +31,7 @@ export const useFetch = url => {
       }
     } catch {
       setError(true);
+      // setData(null);
       setData(nextPickup.data);
       setLoading(false);
     }
