@@ -17,12 +17,17 @@ const UpcomingCollection = styled("section")`
   padding: 10px;
 `;
 
-const NextCollection = styled(UpcomingCollection)``;
+const NextCollection = styled(UpcomingCollection)`
+  vertical-align: middle;
+`;
 
 const Title = styled("h2")`
   flex: 1;
   text-align: left;
   margin-left: 20px;
+  padding: 1em 0;
+  width: 100%;
+  font-size: 1em;
 `;
 
 const Time = styled("h2")`
