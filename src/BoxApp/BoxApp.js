@@ -17,12 +17,16 @@ const UpcomingCollection = styled("section")`
   padding: 10px;
 `;
 
-const NextCollection = styled(UpcomingCollection)`
-  display: flex;
-  justify-content: space-evenly;
-  margin: 10px;
-  background-color: lightgray;
-  padding: 10px;
+const NextCollection = styled(UpcomingCollection)``;
+
+const Title = styled("h2")`
+  flex: 1;
+  text-align: left;
+  margin-left: 20px;
+`;
+
+const Time = styled("h2")`
+  margin-right: 20px;
 `;
 
 function App() {
@@ -35,16 +39,16 @@ function App() {
       <main>
         <div>
           <NextCollection>
-            <h1>Next Collection</h1>
-            <h2>14:00</h2>
-            <h1>Delivery Window</h1>
-            <h2>15:30-16:00</h2>
+            <Title>Next Collection</Title>
+            <Time>14:00</Time>
+            <Title>Delivery Window</Title>
+            <Time>15:30-16:00</Time>
           </NextCollection>
           <UpcomingCollection>
-            <h1>Upcoming Collection</h1>
-            <h2>14:00</h2>
-            <h1>Delivery Window</h1>
-            <h2>15:30-16:00</h2>
+            <Title>Upcoming Collection</Title>
+            <Time>14:00</Time>
+            <Title>Delivery Window</Title>
+            <Time>15:30-16:00</Time>
           </UpcomingCollection>
         </div>
         <div>
