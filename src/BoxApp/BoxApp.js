@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Logo from "../Logo.png";
 
 const Box = styled("div")`
   text-align: center;
@@ -43,9 +44,18 @@ const UrgentReqest = styled("button")`
 `;
 
 function BoxApp({ match }) {
+  const state = {
+    next: "17:00",
+    nextDelivery: "17:00",
+    upcoming: "17:00",
+    upcomingDelivery: "17:00"
+  };
+  const [pickUps, updatePickUps] = useState(state); // delivery or ion
+
   return (
     <Box>
       <CollectionPoint>
+        <img src={Logo} alt="porteroo logo" width={300} />
         <h1>Collection Point</h1>
         <h2> WARD {match.params.ward} </h2>
       </CollectionPoint>
@@ -53,15 +63,15 @@ function BoxApp({ match }) {
         <div>
           <NextCollection>
             <Title>Next Collection</Title>
-            <Time>14:00</Time>
+            <Time>{pickUps.next}</Time>
             <Title>Delivery Window</Title>
-            <Time>15:30-16:00</Time>
+            <Time>{pickUps.nextDelivery}</Time>
           </NextCollection>
           <UpcomingCollection>
             <Title>Upcoming Collection</Title>
-            <Time>14:00</Time>
+            <Time>{pickUps.upcoming}</Time>
             <Title>Delivery Window</Title>
-            <Time>15:30-16:00</Time>
+            <Time>{pickUps.upcomingDelivery}</Time>
           </UpcomingCollection>
         </div>
         <div>
