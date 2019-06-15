@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Header } from "./Header";
+import { useFetch } from "../useFetchHook";
 
 const App = styled("div")`
   text-align: center;
@@ -63,6 +64,9 @@ const renderNext = ({ urgent, next, nextDelivery }) => (
 );
 
 function BoxApp({ match }) {
+  const { loading, data } = useFetch(
+    `https://placeholder.com/locationPickUp/${match.params.ward}`
+  );
   const state = {
     next: "17:00",
     nextDelivery: "17:00",
@@ -75,13 +79,17 @@ function BoxApp({ match }) {
   return (
     <App>
       <Header ward={match.params.ward} />
-      <main>
-        <Col>
-          {pickUps.next ? renderNext(pickUps) : "No upcoming collections"}
-          <Request>Request</Request>
-          <RequestUrgent>Urgent Request</RequestUrgent>
-        </Col>
-      </main>
+      {loading ? (
+        <h2>Loading Porteroo data...</h2>
+      ) : (
+        <main>
+          <Col>
+            {pickUps.next ? renderNext(pickUps) : "No upcoming collections"}
+            <Request>Request</Request>
+            <RequestUrgent>Urgent Request</RequestUrgent>
+          </Col>
+        </main>
+      )}
     </App>
   );
 }
