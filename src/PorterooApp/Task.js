@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const TypeHeading = styled("header")`
   text-decoration: underline;
@@ -54,7 +53,7 @@ const distances = {
 }
 
 // TODO:
-function TaskPage() {
+function Task() {
   const [type, updateType] = useState(null) // delivery or collection
 
   useEffect(() => {
@@ -88,9 +87,9 @@ function TaskPage() {
           <EmphasisText>{getDeadline()}</EmphasisText>
         </div>
       </TravelInfo>
-      <Button type="button"><Link to="/porteroo/updateprogress">Mark as Completed</Link></Button>
+      <Button type="button">Mark as Completed</Button>
     </Card>
   );
 }
 
-export default TaskPage;
+export default Task;

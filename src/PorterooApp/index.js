@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import Task from "./Task"
 const Heading = styled("header")`
   padding: 10px;
 `;
@@ -13,9 +13,12 @@ const dummyUserData = {
 
 function App() {
   return (
-    <Heading>
-      <h1>Hello, {dummyUserData.username}</h1>
-    </Heading>
+    <>
+      <Heading>
+        <h1>Hello, {dummyUserData.username}</h1>
+      </Heading>
+      <main><Task /></main>
+    </>
   );
 }
 

@@ -2,9 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import BoxApp from "./BoxApp/BoxApp";
-import UpdateProgress from "./PorterooApp/UpdateProgress"
-import PorterooAppHeader from "./PorterooApp/index";
-import TaskPage from "./PorterooApp/TaskPage";
+import PorterooApp from "./PorterooApp";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components";
@@ -18,10 +16,8 @@ const App = () => (
   <Container>
     <Router>
       <Route exact path="/" component={BoxApp} />
-      <Route path="/porteroo" component={PorterooAppHeader} />
       <Route path={`/box/:ward`} component={BoxApp} />
-      <Route path="/porteroo/updateprogress" component={UpdateProgress} />
-      <Route path="/porteroo/main" component={TaskPage} />
+      <Route path="/porteroo" component={PorterooApp} />
     </Router>
   </Container>
 );
