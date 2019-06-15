@@ -52,14 +52,14 @@ const Time = styled.h2`
   color: ${props => (props.urgent ? "orangered" : null)};
 `;
 
-const renderNext = ({ urgent, next, nextDelivery }) => (
+const renderNext = ({ urgent, expectedTime, expectedDeliveryTime }) => (
   <NextCollection>
     <Title urgent={urgent}>
       {urgent ? "Next Collection (URGENT)" : "Next Collection"}
     </Title>
-    <Time urgent={urgent}>{next}</Time>
+    <Time urgent={urgent}>{expectedTime}</Time>
     <Title>Delivery Window</Title>
-    <Time>{nextDelivery}</Time>
+    <Time>{expectedDeliveryTime}</Time>
   </NextCollection>
 );
 
@@ -67,14 +67,7 @@ function BoxApp({ match }) {
   const { loading, data } = useFetch(
     `https://placeholder.com/locationPickUp/${match.params.ward}`
   );
-  const state = {
-    next: "17:00",
-    nextDelivery: "17:00",
-    urgent: true,
-    upcoming: "17:00",
-    upcomingDelivery: "17:00"
-  };
-  const [pickUps, updatePickUps] = useState(state); // delivery or ion
+  console.log(data);
 
   return (
     <App>
@@ -84,7 +77,7 @@ function BoxApp({ match }) {
       ) : (
         <main>
           <Col>
-            {pickUps.next ? renderNext(pickUps) : "No upcoming collections"}
+            {data ? renderNext(data) : "No upcoming collections"}
             <Request>Request</Request>
             <RequestUrgent>Urgent Request</RequestUrgent>
           </Col>
