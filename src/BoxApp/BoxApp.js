@@ -29,6 +29,14 @@ const Time = styled("h2")`
   margin-right: 20px;
 `;
 
+const UrgentReqest = styled("button")`
+  font-size: 32px;
+  background-color: lightcoral;
+  color: white;
+  padding: 30px;
+  margin-top: 30px;
+`;
+
 function App() {
   return (
     <Box>
@@ -52,7 +60,7 @@ function App() {
           </UpcomingCollection>
         </div>
         <div>
-          <button>Urgent Collection Request</button>
+          <UrgentReqest>Urgent Collection Request</UrgentReqest>
         </div>
       </main>
     </Box>
