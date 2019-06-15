@@ -37,7 +37,7 @@ const UrgentReqest = styled("button")`
   margin-top: 30px;
 `;
 
-function App() {
+function BoxApp() {
   return (
     <Box>
       <CollectionPoint>
@@ -67,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default BoxApp;
