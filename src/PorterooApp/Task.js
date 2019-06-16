@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { getDeadline } from "../utils/getDeadline";
 
 const TypeHeading = styled("header")`
   text-decoration: underline;
@@ -34,7 +35,7 @@ const Button = styled("button")`
   color: white;
   font-weight: bold;
   padding: 20px 15px;
-  margin-top: 30px;
+  margin-top:20px;
   width: 100%;
 `;
 
@@ -63,12 +64,7 @@ function Task({ location, time }) {
 
   }, [location])
 
-  const getDeadline = (time) => {
-    const currentDate = new Date();
-    // TODO: Check time (int) is in minutes
-    const deadline = new Date(currentDate.getTime() + time * 60000)
-    return deadline.toTimeString().substr(0, 5)
-  }
+
 
   return (
     <>
