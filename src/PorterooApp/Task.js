@@ -30,17 +30,6 @@ const EmphasisText = styled("p")`
 `
 
 
-const Button = styled("button")`
-  font-size: 32px;
-  background-color: green;
-  color: white;
-  font-weight: bold;
-  padding: 20px 15px;
-  margin-top: 30px;
-  width: 100%;
-`;
-
-
 function Task({ location, time }) {
   const [type, updateType] = useState(""); // delivery or collection
   const [text, updateText] = useState("");
@@ -65,7 +54,7 @@ function Task({ location, time }) {
 
   }, [location])
 
-  const Completed = btn(nhsColors.white, nhsColors.green);
+  const CompletedBtn = btn(nhsColors.white, nhsColors.green, nhsColors.darkgreen);
 
   const getDeadline = (time) => {
     const currentDate = new Date();
@@ -90,7 +79,7 @@ function Task({ location, time }) {
         </TravelInfo>
       </Card>
 
-      <Button type="button">Mark as Completed</Button>
+      <CompletedBtn>Mark as completed</CompletedBtn>
     </>
   );
 }
