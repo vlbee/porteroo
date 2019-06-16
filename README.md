@@ -2,9 +2,13 @@
 
 ## Deliveroo for Porters.
 
-Built with React.js, Flask and Google OR-Tools
+An NHS Hackday Application built with React.js, Flask and Google OR-Tools
 
 ## Repos
 [Backend Repo](https://github.com/JJMinton/porter-routing)
 
 [Frontend Repo](https://github.com/vlbee/porteroo)
+
+## Created By
+
+Matthew, Helen, Adam, Jeremy, Vanessa, James and Zak
