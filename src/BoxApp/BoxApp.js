@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "./Header";
 import { useFetch } from "../useFetchHook";
+import {btn} from '../Reusable/buttons.js';
+import {nhsColors} from '../Reusable/colors.js';
 
 const App = styled("div")`
   text-align: center;
@@ -13,29 +15,9 @@ const Col = styled("div")`
   align-items: center;
 `;
 
-const Button = styled("button")`
-  font-size: 32px;
-  color: white;
-  font-weight: bold;
-  padding: 20px 15px;
-  margin: 15px;
-  margin-top: 30px;
-  min-width: 85vw;
+const Request = btn(nhsColors.white, nhsColors.darkgrey);
 
-  @media (min-width: 768px) {
-    min-width: 300px;
-    max-width: 400px;
-  }
-`;
-
-const Request = styled(Button)`
-  background-color: ${props => (props.enable ? "orange" : "lightgrey")};
-`;
-
-const RequestUrgent = styled(Button)`
-  background-color: ${props => (props.enable ? "orangered" : "lightgrey")};
-  margin-top: 10px;
-`;
+const RequestUrgent = btn(nhsColors.white, nhsColors.emergencyred);
 
 const NextCollection = styled("section")`
   background-color: lightgray;
@@ -57,6 +39,7 @@ const Time = styled.h2`
 `;
 
 const renderNext = ({ urgent, expectedTime, expectedDeliveryTime }) => (
+
   <NextCollection>
     <Title urgent={urgent}>
       {urgent ? "Next Collection (URGENT)" : "Next Collection"}
