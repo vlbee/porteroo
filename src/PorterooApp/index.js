@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Task from "./Task"
+import Task from "./Task";
 import pogo from "../Logo.png";
 import { useFetchGet } from "../fetch-util";
-import { getDeadline } from "../utils/getDeadline"
-
+import { getDeadline } from "../utils/getDeadline";
 
 const Heading = styled("header")`
   padding: 10px;
@@ -15,7 +14,6 @@ const LogoContainer = styled("div")`
   margin-bottom: 20px;
   max-width: 300px;
   margin: 0 auto;
-
 `;
 
 const Logo = styled("img")`
@@ -47,32 +45,41 @@ const Col = styled("div")`
 const NextJob = styled("div")`
   background-color: lightgrey;
   padding: 1rem 2rem;
-`
+`;
 
 const Separator = styled("hr")`
   width: 100%;
   border-top: 20px;
   border-color: lightgrey;
   margin-top: 20px;
-`
-
+`;
 
 // PORTER DUMMY DATA
 const dummyUserData = {
   username: "Jim",
   id: 1
-}
+};
 
 // TODO: remove routes dummy data
 // - Routes
 //     - GET porterRoute
 //         - [{location: text, time: int}, ]
-const data = [{ location: "Ward Green", time: 10 }, { location: "Lab", time: 10 }]
+const data = [
+  { location: "Ward Green", time: 10 },
+  { location: "Lab", time: 10 }
+];
 
 const NextTask = ({ location, time }) => {
   if (!location) return <p>No more jobs!</p>;
-  return <NextJob>{getDeadline(time)} - {location === "Lab" ? `Delivery to ${location}` : `Collect from ${location}`}</NextJob>
-}
+  return (
+    <NextJob>
+      {getDeadline(time)} -{" "}
+      {location === "Lab"
+        ? `Delivery to ${location}`
+        : `Collect from ${location}`}
+    </NextJob>
+  );
+};
 const TaskSection = ({ routes, forceRefetchData }) => {
   const [firstRoute, ...nextRoutes] = routes;
 
@@ -80,28 +87,43 @@ const TaskSection = ({ routes, forceRefetchData }) => {
     <>
       <Separator />
       <h4>Current job</h4>
-      <Task {...firstRoute} forceRefetchData={forceRefetchData} porterId={dummyUserData.id} />
+      <Task
+        {...firstRoute}
+        forceRefetchData={forceRefetchData}
+        porterId={dummyUserData.id}
+      />
       <Separator />
       <h4>Next jobs</h4>
-      {nextRoutes.map(route => <NextTask key={route.location + route.time} {...route} />)}
-    </>)
-}
+      {nextRoutes.map(route => (
+        <NextTask key={route.location + route.time} {...route} />
+      ))}
+    </>
+  );
+};
 
 function App() {
-  const [refetchData, forceRefetchData] = useState(false)
+  const [refetchData, forceRefetchData] = useState(false);
   const { loading } = useFetchGet(
-    `https://placeholder.com/porterRoute/${dummyUserData.id}`, refetchData
+    `https://placeholder.com/porterRoute/${dummyUserData.id}`,
+    refetchData
   );
 
   return (
     <Col>
       <LogoContainer>
         <Logo src={pogo} alt="porteroo logo" />
-      </LogoContainer><Heading>
+      </LogoContainer>
+      <Heading>
         <h2>Porter</h2>
         <h1>{dummyUserData.username}</h1>
       </Heading>
-      <main>{loading ? <h2>Loading Porteroo data...</h2> : <TaskSection forceRefetchData={forceRefetchData} routes={data} />}</main>
+      <main>
+        {loading ? (
+          <h2>Loading Porteroo data...</h2>
+        ) : (
+          <TaskSection forceRefetchData={forceRefetchData} routes={data} />
+        )}
+      </main>
     </Col>
   );
 }

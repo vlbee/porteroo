@@ -5,7 +5,7 @@ const nextPickup = {
     expectedTime: 1710,
     expectedDeliveryTime: 1655,
     porterName: "Joe Porter",
-    urgent: false // change this to test different button states
+    urgent: true // change this to test different button states
   }
 };
 
