@@ -54,13 +54,13 @@ function BoxApp({ match }) {
   const [collection, updateCollection] = useState(collectionState);
 
   const { loading, data } = useFetchGet(
-    `https://placeholder.com/locationPickUp/${match.params.ward}`
+    `http://localhost:5000/locationPickUp/${match.params.ward}`
   );
   useEffect(() => {
     !!data &&
       updateCollection({
-        pickUp: data.expectedTime,
-        delivery: data.expectedTime,
+        pickUp: data.estimated_pickup,
+        delivery: data.estimated_dropoff,
         isUrgent: data.urgent
       });
   }, [data, loading]);
