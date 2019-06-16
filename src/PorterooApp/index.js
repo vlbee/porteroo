@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Task from "./Task"
 import pogo from "../Logo.png";
 import { useFetch } from "../useFetchHook";
+import { getDeadline } from "../utils/getDeadline"
 
 
 const Heading = styled("header")`
@@ -43,6 +44,19 @@ const Col = styled("div")`
   }
 `;
 
+const NextJob = styled("div")`
+  background-color: lightgrey;
+  padding: 1rem 2rem;
+`
+
+const Separator = styled("hr")`
+  width: 100%;
+  border-top: 20px;
+  border-color: lightgrey;
+  margin-top: 20px;
+`
+
+
 // PORTER DUMMY DATA
 const dummyUserData = {
   username: "Jim",
@@ -57,14 +71,17 @@ const data = [{ location: "Ward Green", time: 10 }, { location: "Lab", time: 10 
 
 const NextTask = ({ location, time }) => {
   if (!location) return <p>No more jobs!</p>;
-  return <p>{location}</p>
+  return <NextJob>{getDeadline(time)} - {location === "Lab" ? `Delivery to ${location}` : `Collect from ${location}`}</NextJob>
 }
 const TaskSection = ({ routes }) => {
   const [firstRoute, ...nextRoutes] = routes;
 
   return (
     <>
+      <Separator />
+      <h4>Current job</h4>
       <Task {...firstRoute} />
+      <Separator />
       <h4>Next jobs</h4>
       {nextRoutes.map(route => <NextTask key={route.location + route.time} {...route} />)}
     </>)

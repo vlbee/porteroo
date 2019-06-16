@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {btn} from '../Reusable/buttons.js';
 import {nhsColors} from '../Reusable/colors.js';
+import { getDeadline } from "../utils/getDeadline";
 
 const TypeHeading = styled("header")`
   text-decoration: underline;
@@ -29,7 +30,6 @@ const EmphasisText = styled("p")`
     margin: 0;
 `
 
-
 function Task({ location, time }) {
   const [type, updateType] = useState(""); // delivery or collection
   const [text, updateText] = useState("");
@@ -54,14 +54,9 @@ function Task({ location, time }) {
 
   }, [location])
 
+
   const CompletedBtn = btn(nhsColors.white, nhsColors.green, nhsColors.darkgreen);
 
-  const getDeadline = (time) => {
-    const currentDate = new Date();
-    // TODO: Check time (int) is in minutes
-    const deadline = new Date(currentDate.getTime() + time * 60000)
-    return deadline.toTimeString().substr(0, 5)
-  }
 
   return (
     <>
