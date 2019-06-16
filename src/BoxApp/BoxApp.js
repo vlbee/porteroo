@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "./Header";
 import { useFetchGet } from "../fetch-util";
-import {btn} from '../Reusable/buttons.js';
-import {nhsColors} from '../Reusable/colors.js';
+import { RequestButtons } from "./Requests";
 
 const App = styled("div")`
   text-align: center;
@@ -14,10 +13,6 @@ const Col = styled("div")`
   flex-direction: column;
   align-items: center;
 `;
-
-const Request = btn(nhsColors.white, nhsColors.darkgrey);
-
-const RequestUrgent = btn(nhsColors.white, nhsColors.emergencyred);
 
 const NextCollection = styled("section")`
   background-color: lightgray;
@@ -38,33 +33,48 @@ const Time = styled.h2`
   color: ${props => (props.urgent ? "orangered" : null)};
 `;
 
-const renderNext = ({ urgent, expectedTime, expectedDeliveryTime }) => (
-
+const renderNext = ({ isUrgent, pickUp, delivery }) => (
   <NextCollection>
-    <Title urgent={urgent}>
-      {urgent ? "Next Collection (URGENT)" : "Next Collection"}
+    <Title urgent={isUrgent}>
+      {isUrgent ? "Next Collection (URGENT)" : "Next Collection"}
     </Title>
-    <Time urgent={urgent}>{expectedTime}</Time>
+    <Time urgent={isUrgent}>{delivery}</Time>
     <Title>Delivery Window</Title>
-    <Time>{expectedDeliveryTime}</Time>
+    <Time>{pickUp}</Time>
   </NextCollection>
 );
 
 function BoxApp({ match }) {
+  const collectionState = {
+    loading: true,
+    pickUp: null,
+    delivery: null,
+    urgent: false
+  };
+  const [collection, updateCollection] = useState(collectionState);
+
   const { loading, data } = useFetchGet(
     `https://placeholder.com/locationPickUp/${match.params.ward}`
   );
+  useEffect(() => {
+    !!data &&
+      updateCollection({
+        pickUp: data.expectedTime,
+        delivery: data.expectedTime,
+        isUrgent: data.urgent
+      });
+  }, [data, loading]);
 
   // Enables/Disables the requesting buttons depending if a request or urgent request has already been made
-  const requestReset = {
+  const requestState = {
     req: true,
     urgentReq: true
   };
-  const [requestActions, updateRequestActions] = useState(requestReset);
+  const [requestActions, updateRequestActions] = useState(requestState);
 
   useEffect(() => {
-    if (data) {
-      data.urgent
+    if (collection) {
+      collection.isUrgent
         ? updateRequestActions({
             req: false,
             urgentReq: false
@@ -74,9 +84,9 @@ function BoxApp({ match }) {
             urgentReq: true
           });
     } else {
-      updateRequestActions(requestReset);
+      updateRequestActions(requestState);
     }
-  }, [data, requestReset]);
+  }, [collection, requestState]);
 
   return (
     <App>
@@ -86,11 +96,14 @@ function BoxApp({ match }) {
       ) : (
         <main>
           <Col>
-            {data ? renderNext(data) : "No upcoming collections"}
-            <Request enable={requestActions.req}>Request</Request>
-            <RequestUrgent enable={requestActions.urgentReq}>
-              Urgent Request
-            </RequestUrgent>
+            {!!collection.pickUp
+              ? renderNext(collection)
+              : "No upcoming collections"}
+            <RequestButtons
+              ward={match.params.ward}
+              enableReq={requestActions.req}
+              enableUrg={requestActions.urgentReq}
+            />
           </Col>
         </main>
       )}
