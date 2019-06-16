@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Task from "./Task"
 import pogo from "../Logo.png";
-import { useFetch } from "../useFetchHook";
+import { useFetchGet } from "../fetch-util";
 import { getDeadline } from "../utils/getDeadline"
 
 
@@ -80,7 +80,7 @@ const TaskSection = ({ routes }) => {
     <>
       <Separator />
       <h4>Current job</h4>
-      <Task {...firstRoute} />
+      <Task {...firstRoute} porterId={dummyUserData.id} />
       <Separator />
       <h4>Next jobs</h4>
       {nextRoutes.map(route => <NextTask key={route.location + route.time} {...route} />)}
@@ -88,7 +88,7 @@ const TaskSection = ({ routes }) => {
 }
 
 function App() {
-  const { loading } = useFetch(
+  const { loading } = useFetchGet(
     `https://placeholder.com/porterRoute/${dummyUserData.id}`
   );
 
