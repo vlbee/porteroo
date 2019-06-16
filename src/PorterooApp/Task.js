@@ -4,16 +4,24 @@ import styled from "styled-components";
 const TypeHeading = styled("header")`
   text-decoration: underline;
   font-weight: 700;
-  padding-bottom: .2rem;
+  padding: 1rem 2rem .5rem 2rem;
 `;
 
-const Card = styled("div")`
-  padding: 2rem;
+const Card = styled("section")`
   background-color: lightgray;
+  margin: 15px 15px 0 15px;
+  padding-top: 10px;
+  min-width: 85vw;
+
+  @media (min-width: 768px) {
+    min-width: 300px;
+    max-width: 400px;
+  } 
 `;
 
 const TravelInfo = styled("div")`
   display: flex;
+  padding: 0 2rem 2rem;
   justify-content: space-between;
 `;
 
@@ -24,14 +32,23 @@ const EmphasisText = styled("p")`
     margin: 0;
 `
 
+
 const Button = styled("button")`
-  background-color: lightgreen;
-  padding: .8rem 1rem;
+  font-size: 32px;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  padding: 20px 15px;
+  margin: 15px;
   margin-top: 30px;
-  border: 2px solid green;
-  font-weight: 700;
-  color: green;
+  min-width: 85vw;
+
+  @media (min-width: 768px) {
+    min-width: 300px;
+    max-width: 400px;
+  }
 `;
+
 
 // DUMMY DATA
 const nextCheckin = ['3', '4', '2']
@@ -53,7 +70,7 @@ const distances = {
 }
 
 // TODO:
-function Task() {
+function Task({ porterId }) {
   const [type, updateType] = useState(null) // delivery or collection
 
   useEffect(() => {
@@ -74,21 +91,31 @@ function Task() {
     return deadline.toTimeString().substr(0, 5)
   }
 
+
+  //   - Tasks: created_at, type, priority, deadline, startLocation, currentLocation, destination, pickedUpAt, deliveredAt, requester, porter, status (requested, allocated, pickedUp, delivered)
+  //     - PUT completeTask
+  //         - Parameters: location: int, porter: int
+  // - Routes
+  //     - GET porterRoute
+  //         - [{location: text, time: int}, ]
+
   return (
-    <Card>
-      <TypeHeading>{type}</TypeHeading>
-      <TravelInfo>
-        <div>
-          <p>{wardNames[previousCheckin]} to</p>
-          <EmphasisText>{wardNames[nextCheckin[0]]}</EmphasisText>
-        </div>
-        <div>
-          <p>By</p>
-          <EmphasisText>{getDeadline()}</EmphasisText>
-        </div>
-      </TravelInfo>
+    <>
+      <Card>
+        <TypeHeading>{type}</TypeHeading>
+        <TravelInfo>
+          <div>
+            <p>{wardNames[previousCheckin]} to</p>
+            <EmphasisText>{wardNames[nextCheckin[0]]}</EmphasisText>
+          </div>
+          <div>
+            <p>By</p>
+            <EmphasisText>{getDeadline()}</EmphasisText>
+          </div>
+        </TravelInfo>
+      </Card>
       <Button type="button">Mark as Completed</Button>
-    </Card>
+    </>
   );
 }
 
