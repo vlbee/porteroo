@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import {btn} from '../Reusable/buttons.js';
+import {nhsColors} from '../Reusable/colors.js';
 import { getDeadline } from "../utils/getDeadline";
 
 const TypeHeading = styled("header")`
@@ -28,18 +30,6 @@ const EmphasisText = styled("p")`
     margin: 0;
 `
 
-
-const Button = styled("button")`
-  font-size: 32px;
-  background-color: green;
-  color: white;
-  font-weight: bold;
-  padding: 20px 15px;
-  margin-top:20px;
-  width: 100%;
-`;
-
-
 function Task({ location, time }) {
   const [type, updateType] = useState(""); // delivery or collection
   const [text, updateText] = useState("");
@@ -65,6 +55,8 @@ function Task({ location, time }) {
   }, [location])
 
 
+  const CompletedBtn = btn(nhsColors.white, nhsColors.green, nhsColors.darkgreen);
+
 
   return (
     <>
@@ -81,7 +73,8 @@ function Task({ location, time }) {
           </div>
         </TravelInfo>
       </Card>
-      <Button type="button">Mark as Completed</Button>
+
+      <CompletedBtn>Mark as completed</CompletedBtn>
     </>
   );
 }
