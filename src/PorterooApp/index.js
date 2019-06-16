@@ -29,13 +29,13 @@ const Logo = styled("img")`
 
 const Col = styled("div")`
   min-width: 85vw;
-  margin: 2rem auto 0;
+  padding: 2rem;
 
   @media (min-width: 768px) {
     min-width: 300px;
     max-width: 400px;
   }
-  
+
   h1,
   h2 {
     margin: 0;
