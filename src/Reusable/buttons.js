@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const btn = (color, bg, hoverBg, onClick, type, disabled) => {
+export const btn = (color, bg, hoverBg, radius) => {
 	return styled("button")`
 		  font-size: 32px;
 		  color: ${color};
@@ -8,8 +8,11 @@ export const btn = (color, bg, hoverBg, onClick, type, disabled) => {
 		  font-weight: bold;
 		  padding: 20px 15px;
 		  margin: 15px 0;
-		  margin-top: 30px;
+		  cursor: pointer;
+		
 		  min-width: 85vw;
+		  border: none;
+		  border-radius: ${radius};
 
 		  @media (min-width: 768px) {
 		    min-width: 300px;
@@ -17,7 +20,11 @@ export const btn = (color, bg, hoverBg, onClick, type, disabled) => {
 		  }
 
 		  :hover, :active {
-		  	background: ${hoverBg}
+		  	background: ${hoverBg};
+		  }
+
+		  :first-child {
+		  	  margin-top: 30px;
 		  }
 	`;
 }

@@ -11,7 +11,7 @@ const TypeHeading = styled("header")`
 `;
 
 const Card = styled("section")`
-  background-color: lightgray;
+  background-color: ${nhsColors.palegrey};
   padding-top: 10px;
   width: 100%;
 `;
@@ -54,7 +54,7 @@ function Task({ location, time }) {
 
   }, [location])
 
-  const CompletedBtn = btn(nhsColors.white, nhsColors.green, nhsColors.darkgreen);
+  const CompletedBtn = btn(nhsColors.white, nhsColors.green, nhsColors.darkgreen, "10px");
 
   const getDeadline = (time) => {
     const currentDate = new Date();
@@ -79,7 +79,7 @@ function Task({ location, time }) {
         </TravelInfo>
       </Card>
 
-      <CompletedBtn>Mark as completed</CompletedBtn>
+      <CompletedBtn style={{width: '100%'}}>Mark as completed</CompletedBtn>
     </>
   );
 }

@@ -14,6 +14,14 @@ const Layout = styled("div")`
   }
 `;
 
+const TypeHeading = styled("header")`
+
+  text-align: center;
+  font-weight: 700;
+  padding: 1rem 2rem .5rem 2rem;
+`;
+
+
 const Logo = styled("img")`
   margin-bottom: 20px;
   max-width: 300px;
@@ -27,7 +35,7 @@ export const Header = ({ ward }) => {
     <Layout>
       <Logo src={pogo} alt="porteroo logo" />
       <div>
-        <h2>Collection Point</h2>
+        <TypeHeading>Collection Point:</TypeHeading>
         <h1> WARD {ward} </h1>
       </div>
     </Layout>

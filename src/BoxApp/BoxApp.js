@@ -15,12 +15,12 @@ const Col = styled("div")`
   align-items: center;
 `;
 
-const Request = btn(nhsColors.white, nhsColors.darkgrey);
+const Request = btn(nhsColors.white, nhsColors.midgrey, nhsColors.darkgrey, "10px");
 
-const RequestUrgent = btn(nhsColors.white, nhsColors.emergencyred);
+const RequestUrgent = btn(nhsColors.white, nhsColors.emergencyred, nhsColors.darkred, "10px");
 
 const NextCollection = styled("section")`
-  background-color: lightgray;
+  background-color: ${nhsColors.palegrey};
   margin: 15px 15px 0 15px;
   padding-top: 10px;
   min-width: 85vw;
@@ -49,6 +49,7 @@ const renderNext = ({ urgent, expectedTime, expectedDeliveryTime }) => (
     <Time>{expectedDeliveryTime}</Time>
   </NextCollection>
 );
+
 
 function BoxApp({ match }) {
   const { loading, data } = useFetch(
