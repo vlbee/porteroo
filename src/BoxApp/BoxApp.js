@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "./Header";
-import { useFetch } from "../useFetchHook";
+import { useFetchGet } from "../fetch-util";
 import {btn} from '../Reusable/buttons.js';
 import {nhsColors} from '../Reusable/colors.js';
 
@@ -51,7 +51,7 @@ const renderNext = ({ urgent, expectedTime, expectedDeliveryTime }) => (
 );
 
 function BoxApp({ match }) {
-  const { loading, data } = useFetch(
+  const { loading, data } = useFetchGet(
     `https://placeholder.com/locationPickUp/${match.params.ward}`
   );
 
