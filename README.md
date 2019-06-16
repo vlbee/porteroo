@@ -1,4 +1,4 @@
-![Porteroo Logo](https://i.imgur.com/VYoRQx2.png)
+![Porteroo Logo](https://i.imgur.com/Bn1EWMr.png)
 
 ## Deliveroo for Porters.
 
