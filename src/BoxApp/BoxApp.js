@@ -93,7 +93,7 @@ function BoxApp({ match }) {
     } else {
       updateRequestActions(requestReset);
     }
-  });
+  }, [data, requestReset]);
 
   return (
     <App>
