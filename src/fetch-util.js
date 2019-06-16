@@ -31,9 +31,11 @@ export const useFetchGet = (url, rerun) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
+  // const data = [{ location: 0, time: 10 }, { location: 1, time: 30 }, { location: 3, time: 40 }]
+
   useEffect(() => {
+    if (rerun) return { loading: false, data: [{ location: "Lab", time: 30 }, { location: "Ward Blue", time: 40 }], error: false }
     async function fetchData() {
-      console.log('RUNNING ')
       try {
         const response = await fetch(url, {
           method: "GET",
@@ -44,8 +46,8 @@ export const useFetchGet = (url, rerun) => {
           setData(null);
           setLoading(false);
         } else {
-          const json = await response.json();
-          setData(json);
+          // const json = await response.json();
+          setData([{ location: "Ward Green", time: 10 }, { location: "Lab", time: 30 }, { location: "Ward Blue", time: 40 }]);
           setLoading(false);
         }
       } catch {
@@ -59,5 +61,5 @@ export const useFetchGet = (url, rerun) => {
     fetchData();
   }, [url, rerun]);
 
-  return { loading, data, error };
+  return { loading, data: data || [], error };
 };
