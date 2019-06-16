@@ -14,32 +14,32 @@ export const useFetch = url => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
-  async function fetchData() {
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-      });
-      if (response.status !== 200) {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" }
+        });
+        if (response.status !== 200) {
+          setError(true);
+          setData(null);
+          setLoading(false);
+        } else {
+          const json = await response.json();
+          setData(json);
+          setLoading(false);
+        }
+      } catch {
         setError(true);
-        setData(null);
-        setLoading(false);
-      } else {
-        const json = await response.json();
-        setData(json);
+        // setData(null);
+        setData(nextPickup.data);
         setLoading(false);
       }
-    } catch {
-      setError(true);
-      // setData(null);
-      setData(nextPickup.data);
-      setLoading(false);
     }
-  }
 
-  useEffect(() => {
     fetchData();
-  }, []);
+  }, [url]);
 
   return { loading, data, error };
 };
