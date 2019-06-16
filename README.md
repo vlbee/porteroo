@@ -1,5 +1,6 @@
-# Porteroo
-Deliveroo for Porters
+![Porteroo Logo](https://i.imgur.com/VYoRQx2.png)
+
+## Deliveroo for Porters.
 
 Built with React.js, Flask and Google OR-Tools
 
