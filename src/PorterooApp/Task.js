@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const Heading = styled("header")`
-  padding: 10px;
-`;
-
 const TypeHeading = styled("header")`
   text-decoration: underline;
   font-weight: 700;
@@ -12,9 +8,8 @@ const TypeHeading = styled("header")`
 `;
 
 const Card = styled("div")`
-  padding: 1rem;
+  padding: 2rem;
   background-color: lightgray;
-  max-width: 80%;
 `;
 
 const TravelInfo = styled("div")`
@@ -22,11 +17,23 @@ const TravelInfo = styled("div")`
   justify-content: space-between;
 `;
 
-// DUMMY DATA
-const dummyUserData = {
-  username: "Porter Jim"
-}
+const EmphasisText = styled("p")`
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+`
 
+const Button = styled("button")`
+  background-color: lightgreen;
+  padding: .8rem 1rem;
+  margin-top: 30px;
+  border: 2px solid green;
+  font-weight: 700;
+  color: green;
+`;
+
+// DUMMY DATA
 const nextCheckin = ['3', '4', '2']
 
 const previousCheckin = '4'
@@ -45,21 +52,20 @@ const distances = {
   }
 }
 
-function App() {
+// TODO:
+function Task() {
   const [type, updateType] = useState(null) // delivery or collection
 
   useEffect(() => {
     if (nextCheckin[0] === '4') {
-      updateType('Delivery')
-    } else {
       updateType('Collection')
+    } else {
+      updateType('Delivery')
     }
 
     // TODO: No longer disable next line once nextCheckin updates
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextCheckin])
-
-
 
   const getDeadline = () => {
     const currentDate = new Date();
@@ -69,27 +75,21 @@ function App() {
   }
 
   return (
-    <>
-      <Heading>
-        <h1>Hello, {dummyUserData.username}</h1>
-      </Heading>
-      <main>
-        <Card>
-          <TypeHeading>{type}</TypeHeading>
-          <TravelInfo>
-            <div>
-              <p>{wardNames[previousCheckin]} to</p>
-              <p>{wardNames[nextCheckin[0]]}</p>
-            </div>
-            <div>
-              <p>By</p>
-              <div>{getDeadline()}</div>
-            </div>
-          </TravelInfo>
-        </Card>
-      </main>
-    </>
+    <Card>
+      <TypeHeading>{type}</TypeHeading>
+      <TravelInfo>
+        <div>
+          <p>{wardNames[previousCheckin]} to</p>
+          <EmphasisText>{wardNames[nextCheckin[0]]}</EmphasisText>
+        </div>
+        <div>
+          <p>By</p>
+          <EmphasisText>{getDeadline()}</EmphasisText>
+        </div>
+      </TravelInfo>
+      <Button type="button">Mark as Completed</Button>
+    </Card>
   );
 }
 
-export default App;
+export default Task;

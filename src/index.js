@@ -2,18 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import BoxApp from "./BoxApp/BoxApp";
-import PorterooApp from "./PorterooApp/PorterooApp";
+import PorterooApp from "./PorterooApp";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import styled from "styled-components";
 
-// const wards = ["A", "B", "C", "D"];
+const Container = styled("div")`
+  max-width: 550px;
+  margin: 0 auto;
+`;
 
 const App = () => (
-  <Router>
-    <Route exact path="/" component={BoxApp} />
-    <Route path="/porteroo" component={PorterooApp} />
-    <Route path={`/box/:ward`} component={BoxApp} />
-  </Router>
+  <Container>
+    <Router>
+      <Route exact path="/" component={BoxApp} />
+      <Route path={`/box/:ward`} component={BoxApp} />
+      <Route path="/porteroo" component={PorterooApp} />
+    </Router>
+  </Container>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
