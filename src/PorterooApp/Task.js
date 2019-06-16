@@ -31,7 +31,7 @@ const EmphasisText = styled("p")`
     margin: 0;
 `
 
-function Task({ location, time, porterId }) {
+function Task({ location, time, porterId, forceRefetchData }) {
   const [type, updateType] = useState(""); // delivery or collection
   const [text, updateText] = useState("");
   const [postingCompleteTask, updatePostingCompleteTask] = useState(false)
@@ -65,6 +65,7 @@ function Task({ location, time, porterId }) {
     await fetchPost(`https://placeholder.com/porterRoute?location=${location}]?porter=${porterId}`)
     updatePostingCompleteTask(false)
     alert("Completed task - good job 👍")
+    forceRefetchData(true)
   }
   return (
     <>

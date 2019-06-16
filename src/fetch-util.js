@@ -26,13 +26,14 @@ export const fetchPost = async url => {
   }
 };
 
-export const useFetchGet = url => {
+export const useFetchGet = (url, rerun) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
+      console.log('RUNNING ')
       try {
         const response = await fetch(url, {
           method: "GET",
@@ -56,7 +57,7 @@ export const useFetchGet = url => {
     }
 
     fetchData();
-  }, [url]);
+  }, [url, rerun]);
 
   return { loading, data, error };
 };

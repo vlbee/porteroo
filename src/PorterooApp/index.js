@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Task from "./Task"
 import pogo from "../Logo.png";
@@ -73,14 +73,14 @@ const NextTask = ({ location, time }) => {
   if (!location) return <p>No more jobs!</p>;
   return <NextJob>{getDeadline(time)} - {location === "Lab" ? `Delivery to ${location}` : `Collect from ${location}`}</NextJob>
 }
-const TaskSection = ({ routes }) => {
+const TaskSection = ({ routes, forceRefetchData }) => {
   const [firstRoute, ...nextRoutes] = routes;
 
   return (
     <>
       <Separator />
       <h4>Current job</h4>
-      <Task {...firstRoute} porterId={dummyUserData.id} />
+      <Task {...firstRoute} forceRefetchData={forceRefetchData} porterId={dummyUserData.id} />
       <Separator />
       <h4>Next jobs</h4>
       {nextRoutes.map(route => <NextTask key={route.location + route.time} {...route} />)}
@@ -88,8 +88,9 @@ const TaskSection = ({ routes }) => {
 }
 
 function App() {
+  const [refetchData, forceRefetchData] = useState(false)
   const { loading } = useFetchGet(
-    `https://placeholder.com/porterRoute/${dummyUserData.id}`
+    `https://placeholder.com/porterRoute/${dummyUserData.id}`, refetchData
   );
 
   return (
@@ -100,7 +101,7 @@ function App() {
         <h2>Porter</h2>
         <h1>{dummyUserData.username}</h1>
       </Heading>
-      <main>{loading ? <h2>Loading Porteroo data...</h2> : <TaskSection routes={data} />}</main>
+      <main>{loading ? <h2>Loading Porteroo data...</h2> : <TaskSection forceRefetchData={forceRefetchData} routes={data} />}</main>
     </Col>
   );
 }
