@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {btn} from '../Reusable/buttons.js';
-import {nhsColors} from '../Reusable/colors.js';
+import { btn } from '../Reusable/buttons.js';
+import { nhsColors } from '../Reusable/colors.js';
+import { getDeadline } from "../utils/getDeadline";
+import { fetchPost } from "../fetch-util"
 
 const TypeHeading = styled("header")`
   text-decoration: underline;
@@ -29,10 +31,10 @@ const EmphasisText = styled("p")`
     margin: 0;
 `
 
-
-function Task({ location, time }) {
+function Task({ location, time, porterId }) {
   const [type, updateType] = useState(""); // delivery or collection
   const [text, updateText] = useState("");
+  const [postingCompleteTask, updatePostingCompleteTask] = useState(false)
 
   useEffect(() => {
     // TODO: Check lab location
@@ -56,13 +58,13 @@ function Task({ location, time }) {
 
   const CompletedBtn = btn(nhsColors.white, nhsColors.green, nhsColors.darkgreen, "10px");
 
-  const getDeadline = (time) => {
-    const currentDate = new Date();
-    // TODO: Check time (int) is in minutes
-    const deadline = new Date(currentDate.getTime() + time * 60000)
-    return deadline.toTimeString().substr(0, 5)
-  }
+  const handleClick = async () => {
+    updatePostingCompleteTask(true)
 
+    await fetchPost(`https://placeholder.com/porterRoute?location=${location}]?porter=${porterId}`)
+    updatePostingCompleteTask(false)
+    alert("Completed task - good job 👍")
+  }
   return (
     <>
       <Card>
@@ -79,7 +81,7 @@ function Task({ location, time }) {
         </TravelInfo>
       </Card>
 
-      <CompletedBtn style={{width: '100%'}}>Mark as completed</CompletedBtn>
+      <CompletedBtn disabled={postingCompleteTask} onClick={handleClick}>{postingCompleteTask ? 'Loading...' : "Mark as completed" style={{width: '100%'}}}</CompletedBtn>
     </>
   );
 }

@@ -9,7 +9,24 @@ const nextPickup = {
   }
 };
 
-export const useFetch = url => {
+export const fetchPost = async url => {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    });
+    if (response.status !== 200) {
+      return { error: true, data: null, loading: false };
+    } else {
+      const json = await response.json();
+      return { error: false, data: json, loading: false };
+    }
+  } catch {
+    return { error: true, data: null, loading: false };
+  }
+};
+
+export const useFetchGet = url => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
