@@ -10,15 +10,17 @@ const RequestUrgent = btn(nhsColors.white, nhsColors.emergencyred);
 export const RequestButtons = (ward, enableReq, enableUrg) => {
   const handleClick = async isUrgent => {
     if (!isUrgent) {
-      await fetchPost(
-        `https://placeholder.com/newTask?urgent=false&location=${ward}`
-      );
-      alert("Non Urgent Requested");
+      await fetchPost(`http//localhost:5000/request`, {
+        urgent: false,
+        location: ward,
+        destination: 0
+      });
     } else {
-      await fetchPost(
-        `https://placeholder.com/newTask?urgent=true&location=${ward}`
-      );
-      alert("Urgent Requested");
+      await fetchPost(`http://localhost:5000/request`, {
+        urgent: true,
+        location: ward,
+        destination: 0
+      });
     }
   };
 

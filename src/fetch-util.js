@@ -9,10 +9,11 @@ const nextPickup = {
   }
 };
 
-export const fetchPost = async url => {
+export const fetchPost = async (url, body) => {
   try {
     const response = await fetch(url, {
       method: "POST",
+      body,
       headers: { "Content-Type": "application/json" }
     });
     if (response.status !== 200) {
@@ -33,7 +34,7 @@ export const useFetchGet = (url, rerun) => {
 
   useEffect(() => {
     async function fetchData() {
-      console.log('RUNNING ')
+      console.log("RUNNING ");
       try {
         const response = await fetch(url, {
           method: "GET",
