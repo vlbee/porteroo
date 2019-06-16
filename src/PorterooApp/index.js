@@ -4,6 +4,7 @@ import Task from "./Task"
 import pogo from "../Logo.png";
 import { useFetch } from "../useFetchHook";
 
+
 const Heading = styled("header")`
   padding: 10px;
   text-align: center;
@@ -65,7 +66,7 @@ const TaskSection = ({ routes }) => {
     <>
       <Task {...firstRoute} />
       <h4>Next jobs</h4>
-      {nextRoutes.map(route => <NextTask {...route} />)}
+      {nextRoutes.map(route => <NextTask key={route.location + route.time} {...route} />)}
     </>)
 }
 

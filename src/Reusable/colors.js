@@ -1,5 +1,3 @@
-import React from "react";
-
 export const nhsColors = {
 		blue: "#005EB8",
 		white: "#fff",
@@ -24,4 +22,3 @@ export const nhsColors = {
 		warmyellow: "#FFB81C",
 		yellow: "#FAE100"
 	}
-

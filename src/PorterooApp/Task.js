@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import {btn} from '../Reusable/buttons.js';
+import {nhsColors} from '../Reusable/colors.js';
 
 const TypeHeading = styled("header")`
   text-decoration: underline;
@@ -63,6 +65,8 @@ function Task({ location, time }) {
 
   }, [location])
 
+  const Completed = btn(nhsColors.white, nhsColors.green);
+
   const getDeadline = (time) => {
     const currentDate = new Date();
     // TODO: Check time (int) is in minutes
@@ -85,6 +89,7 @@ function Task({ location, time }) {
           </div>
         </TravelInfo>
       </Card>
+
       <Button type="button">Mark as Completed</Button>
     </>
   );
