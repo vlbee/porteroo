@@ -31,6 +31,11 @@ const Col = styled("div")`
   min-width: 85vw;
   margin: 2rem auto 0;
 
+  @media (min-width: 768px) {
+    min-width: 300px;
+    max-width: 400px;
+  }
+  
   h1,
   h2 {
     margin: 0;
