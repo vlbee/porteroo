@@ -4,6 +4,8 @@
 
 An NHS Hackday Application built with React.js, Flask and Google OR-Tools.
 
+Won First place in the NHS Hackathon! 🥇 Also voted best project by the community.
+
 Aim: Improving efficiency of specimen collection in hospitals.
 
 ## Screens
