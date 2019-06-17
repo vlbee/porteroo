@@ -12,6 +12,8 @@ Aim: Improving efficiency of specimen collection in hospitals.
 
 ![Product](https://user-images.githubusercontent.com/25727036/59587667-b6c44900-90dd-11e9-9ca6-6132dbc0d296.jpg)
 
+- Proof that that we linked up the front end with the back end API!
+
 ![Porter Side](https://media.giphy.com/media/UuTob8D0m8Jrsnvz4F/giphy.gif)
 
 ## Repos
@@ -24,6 +26,8 @@ Aim: Improving efficiency of specimen collection in hospitals.
 [Slides (PDF)](https://github.com/vlbee/porteroo/files/3295758/Porteroo.Slides.pdf)
 
 [HackMD notes](https://hackmd.io/mGsCE-0aS0u-yBwFmBpZDA?edit)
+
+[Figma Designs](https://www.figma.com/file/Fv8lZHp8IlZJuZyf7n1ozqNa/nhs?node-id=0%3A1)
 
 ## Created By
 
