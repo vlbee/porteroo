@@ -63,20 +63,6 @@ const dummyUserData = {
   id: 1
 }
 
-// TODO: remove routes dummy data
-// - Routes
-//     - GET porterRoute
-//         - [{location: text, time: int}, ]
-
-// fetch request for location to ward name
-
-// const wardNames = {
-//   0: "Ward Green",
-//   1: "Lab",
-//   2: "Ward Red",
-//   3: "Ward Blue"
-// }
-
 const NextTask = ({ location, time }) => {
   if (!location) return <p>No more jobs!</p>;
   return <NextJob>{getDeadline(time)} - {location === "Lab" ? `Delivery to ${location}` : `Collect from ${location}`}</NextJob>
@@ -95,16 +81,21 @@ const TaskSection = ({ routes, forceRefetchData }) => {
     </>)
 }
 
-const data = [{ location: "Ward Green", time: 10 }, { location: "Lab", time: 30 }, { location: "Ward Blue", time: 40 }]
-const dataTwo = [{ location: "Lab", time: 30 }, { location: "Ward Blue", time: 40 }]
+const wardNames = {
+  0: "Lab",
+  1: "Ward Blue",
+  2: "Ward Green",
+  3: "Ward Red",
+  10: "Ward Teal"
+}
 
 function App() {
   const [refetchData, forceRefetchData] = useState(false)
-  const { loading } = useFetchGet(
-    `https://placeholder.com/porterRoute/${dummyUserData.id}`, refetchData
+  const { loading, data } = useFetchGet(
+    `http://29bbbb63.ngrok.io/porterRoute/${dummyUserData.id}`, refetchData
   );
 
-  // const routes = data.map(route => ({ location: wardNames[route.location] || "Unknown", time: route.time }))
+  const routes = (data && data.length > 0) ? data.map(route => ({ location: wardNames[route.location] || "Ward Base", time: route.estimated_pickup, locationId: route.location })) : []
 
   return (
     <Col>
@@ -114,7 +105,7 @@ function App() {
         <h2>Porter</h2>
         <h1>{dummyUserData.username}</h1>
       </Heading>
-      <main>{loading ? <h2>Loading Porteroo data...</h2> : <TaskSection forceRefetchData={forceRefetchData} routes={refetchData ? dataTwo : data} />}</main>
+      <main>{loading ? <h2>Loading Porteroo data...</h2> : <TaskSection forceRefetchData={forceRefetchData} routes={routes} />}</main>
     </Col>
   );
 }

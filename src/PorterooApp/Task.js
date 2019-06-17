@@ -31,7 +31,7 @@ const EmphasisText = styled("p")`
     margin: 0;
 `
 
-function Task({ location, time, porterId, forceRefetchData }) {
+function Task({ location, time, porterId, forceRefetchData, locationId }) {
   const [type, updateType] = useState(""); // delivery or collection
   const [text, updateText] = useState("");
   const [postingCompleteTask, updatePostingCompleteTask] = useState(false)
@@ -62,7 +62,7 @@ function Task({ location, time, porterId, forceRefetchData }) {
   const handleClick = async () => {
     updatePostingCompleteTask(true)
 
-    await fetchPost(`https://placeholder.com/porterRoute?location=${location}]?porter=${porterId}`)
+    await fetchPost(`http://29bbbb63.ngrok.io/checkin/${locationId}`)
     updatePostingCompleteTask(false)
     alert("Completed task - good job 👍")
     forceRefetchData(true)

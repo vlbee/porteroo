@@ -12,7 +12,7 @@ const nextPickup = {
 export const fetchPost = async url => {
   try {
     const response = await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json" }
     });
     if (response.status !== 200) {
@@ -31,10 +31,7 @@ export const useFetchGet = (url, rerun) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
-  // const data = [{ location: 0, time: 10 }, { location: 1, time: 30 }, { location: 3, time: 40 }]
-
   useEffect(() => {
-    if (rerun) return { loading: false, data: [{ location: "Lab", time: 30 }, { location: "Ward Blue", time: 40 }], error: false }
     async function fetchData() {
       try {
         const response = await fetch(url, {
@@ -46,8 +43,8 @@ export const useFetchGet = (url, rerun) => {
           setData(null);
           setLoading(false);
         } else {
-          // const json = await response.json();
-          setData([{ location: "Ward Green", time: 10 }, { location: "Lab", time: 30 }, { location: "Ward Blue", time: 40 }]);
+          const json = await response.json();
+          setData(json);
           setLoading(false);
         }
       } catch {
